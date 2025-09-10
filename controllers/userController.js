@@ -21,7 +21,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
   //Hash Password
   const hashedPassword = await bcrypt.hash(password, 10);
-  console.log("Hashed Password:", hashedPassword);
+  // console.log("Hashed Password:", hashedPassword);
   const user = await User.create({
     username,
     email,
@@ -37,8 +37,6 @@ const registerUser = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("User data is not valid");
   }
-
-  // res.json({ message: "Register the user"});
 });
 
 //@desc Login a user
@@ -66,11 +64,10 @@ const loginUser = asyncHandler(async (req, res) => {
       { expiresIn: "15m" }
     );
     res.status(200).json({ accessToken });
-  }else{
+  } else {
     res.status(401);
-    throw new Error("Email or password is not valid")
+    throw new Error("Email or password is not valid");
   }
-//   res.json({ message: "Login the user" });
 });
 
 //@desc Current user info
